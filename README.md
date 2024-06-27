@@ -1,2 +1,3 @@
-# odin-knights-travails
-Knights Travails project for TOP 
+# Knights Travails Project - TOP 
+
+I created this project as part of The Odin Project's Ruby curriculum. In this project, I developed a solution to the "Knight's Travails" problem, which involves finding the shortest path for a knight to travel on a chessboard from a starting position to a target position. Using breadth-first search, I implemented an algorithm that efficiently calculates this path and outputs the sequence of moves the knight must take. This project helped me deepen my understanding of algorithms and data structures, particularly in the context of graph traversal and search techniques.
