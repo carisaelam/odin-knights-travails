@@ -1,5 +1,3 @@
-require 'set'
-
 # return all possible moves for knight at (x, y)
 def possible_moves(position)
   x = position[0]
@@ -30,6 +28,7 @@ def filter_possible_moves(moves)
   legal_moves
 end
 
+# build graph of all possible knight moves
 def adjacency_list_hash
   adjacency_list_hash = {}
   (0..7).each do |x|
@@ -41,6 +40,7 @@ def adjacency_list_hash
   adjacency_list_hash
 end
 
+# return shortest path between start and target
 def bfs_traversal(starting_position = [0, 0], target = [1, 2])
   return [starting_position] if starting_position == target
 
