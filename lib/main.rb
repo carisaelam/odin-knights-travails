@@ -1,5 +1,9 @@
+require 'set'
+
 # return all possible moves for knight at (x, y)
-def possible_moves(x, y)
+def possible_moves(position)
+  x = position[0]
+  y = position[1]
   moves = []
   moves.push([x + 1, y + 2])
   moves.push([x + 1, y - 2])
@@ -26,18 +30,45 @@ def filter_possible_moves(moves)
   legal_moves
 end
 
-# return adjacency list for position
-def adjacency_list(possible_moves)
-  adjacency_list = []
-  possible_moves.each_with_index do |move, i|
-    x = move[0]
-    y = move[1]
-    adjacency_list.push(possible_moves(x, y))
-    # puts "move: #{move} / index: #{i}"
-    # puts "adj_list for move #{i}:
-    # #{possible_moves(x, y)}\n\n"
+def adjacency_list_hash
+  adjacency_list_hash = {}
+  (0..7).each do |x|
+    (0..7).each do |y|
+      moves = possible_moves([x, y])
+      adjacency_list_hash[[x, y]] = moves
+    end
   end
-  adjacency_list
+  adjacency_list_hash
 end
 
-p adjacency_list(possible_moves(0, 0))
+def bfs_traversal(starting_position = [0, 0], target = [1, 2])
+  return [starting_position] if starting_position == target
+
+  queue = [[starting_position]]
+  visited = Set.new([starting_position])
+
+  until queue.empty?
+    current_path = queue.shift
+    current_position = current_path.last
+
+    adjacency_list_hash[current_position].each do |position|
+      next if visited.include?(position)
+
+      visited.add(position)
+      new_path = (current_path + [position])
+
+      return new_path if position == target
+
+      queue.push(new_path)
+    end
+
+  end
+end
+
+def knight_moves(start_position, end_position)
+  path = bfs_traversal(start_position, end_position)
+  distance = path.size - 1
+  p "The shortest distance from #{start_position} to #{end_position} was: #{distance} moves. The path was #{path}"
+end
+
+knight_moves([3, 3], [4, 3])
