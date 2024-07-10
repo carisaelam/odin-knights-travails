@@ -71,4 +71,5 @@ def knight_moves(start_position, end_position)
   p "The shortest distance from #{start_position} to #{end_position} was: #{distance} moves. The path was #{path}"
 end
 
-knight_moves([3, 3], [4, 3])
+# knight_moves([3, 3], [4, 3])
+p bfs_traversal([0, 0], [6, 6])
